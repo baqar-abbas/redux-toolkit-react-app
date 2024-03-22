@@ -1,0 +1,69 @@
+Cake Shop
+
+Entities
+
+Shop - stores cakes on the shelf
+shopkeeper - behind the counter
+customer - at the store entrance
+
+Activities
+
+Customer - Order a Cake
+Shopkeeper - Box a cake from the shelf
+           - receipt to keep track of the purchase
+
+Three core Concepts of Redux
+
+Cake Shop Scenario                Redux               Purpose
+Shop                              Store               Holds the state of your application
+Cake Ordered                      Action              Describe what happens
+Shopkeeper                        Reducer             Ties the Store and Actions together
+
+Store -> A store holds the state of your application.
+Action -> An action that describes what happened in the application.
+Reducer -> A reducer which handles the action and decides how to update the state.
+
+Three Principles (The Redux pattern)
+
+First Principle
+"The gloabl state of your application is stored as an object inside a single store."
+Maintain our application state in a single object which would be managed by redux store
+
+Cake-Shop
+Let's assume we are tracking the number of cakes in the shelf
+{
+    numberOfCakes = 10
+}
+
+Second Principle
+"The only way to change the state is to dispatch an action, an action that desribes what happened"
+To update the state of your app, you need to let Redux know about that with an action.
+Not allowed to directly update the state object.
+
+Cake Shop
+Scan the QR code and and place an order - CAKE_ORDERED ( Cannot directly update the cake object)
+
+{
+    type: 'CAKE_ORDERED'
+}
+
+Note: The state is read only the only way to change the state is by dispatching an action.
+
+Third Principle
+"To specify how the state tree is updated based on actions, you write pure reducers"
+Reducer - (prevState, action) => newState
+
+Cake Shop 
+Reducer is the shopkeeper
+
+const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case CAKE_ORDERED: 
+            return {
+                numberOfCakes: state.numberOfCakes - 1
+            }
+        }
+    }
+}
+
+Note: To update the state of your application you write pure reducers
